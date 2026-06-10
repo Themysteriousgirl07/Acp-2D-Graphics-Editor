@@ -1,34 +1,27 @@
-# AI Analysis & Visualization Prompts for 2D Graphics Editor
+Project Analysis and Debugging Notes
 
-Use these prompts with an AI assistant to deep-dive into the code, suggest improvements, or visualize the logic.
+Use these questions and prompts to double-check the logic of the code, especially for the graphics algorithms and the structural design of the canvas.
 
----
+General Logic and Flow:
+- Explain how the 2D character array works as a canvas. Is it efficient to clear and redraw everything every time a shape is added, or is there a better way to do it for a terminal app?
+- Give me a step-by-step trace of what happens when the user picks option 1 to add a circle. Start from main() and go through draw_circle and put_pixel.
+- Looking at the Shape struct, is there a way to handle the extra variables more efficiently? Like, why do we need x3 and y3 for a line, or radius for a triangle? Should we use a union instead?
 
-### 🔍 1. Code Logic & Architecture
-- "Explain the overall architecture of this C program. How does the canvas state management work between the `Shape` struct and the `canvas` array?"
-- "Trace the execution flow of the `main()` function. How is the menu-driven loop handled and what happens when an object is added vs rendered?"
-- "Analyze the memory management in this program. Since it uses fixed-size arrays (`MAX_SHAPES`), what are the pros/cons compared to dynamic allocation with `malloc`?"
+Algorithm Specifics (CG Labs):
+- Explain the Bresenham's implementation in draw_line. How does the error variable calculation (2*err) relate to the mathematical derivation we see in textbooks?
+- For the Midpoint Circle algorithm, why do we only calculate one octant and then use 8-way symmetry? Show the math for how (xc + x, yc + y) relates to the other 7 points.
+- If I change the canvas size to 100x100, will these algorithms still work, or is something hardcoded that will break?
 
-### 📐 2. Algorithm Deep Dives
-- "Explain Bresenham's Line Algorithm as implemented in `draw_line()`. How does the error variable (`err`) determine when to move along the Y-axis?"
-- "How does the Midpoint Circle Algorithm in `draw_circle()` ensure the circle is symmetrical? Explain the 8-way symmetry logic used in `put_pixel()` calls."
-- "Visualise the 'Midpoint Circle' logic: If I call `draw_circle(40, 12, 5)`, which exact coordinates on the 80x25 grid will be marked with '*'?"
+Memory and Array Management:
+- We're using MAX_SHAPES = 100. What happens if the code reaches 101? Could we use pointers and dynamic memory (malloc) to make this unlimited?
+- Is there any risk of a buffer overflow when inputting coordinates in scanf? How do we stop the user from typing a coordinate like (200, 200)?
 
-### 🛠️ 3. Feature Expansion & Refactoring
-- "Suggest a way to implement a 'Flood Fill' algorithm to color inside the shapes. What data structure would be most efficient for this?"
-- "How would you refactor the `Shape` struct to support modern C features or to make it easier to add new shapes like Ellipses or Polygons?"
-- "Show me how to modify the `display_canvas()` function to support ANSI color codes, so different shapes appear in different colors in the terminal."
+Possible Improvements for the Lab:
+- How can I add a feature to save the current 'canvas' state into a permanent text file and then load it back later?
+- Right now it just uses '*', can we modify the struct so each shape can have its own character (like '#', '@', or '+')?
+- How would you implement a simple 'undo' feature that deletes the last shape added to the shapes array?
 
-### 🐞 4. Debugging & Edge Cases
-- "What happens if a user inputs coordinates that fall outside the 80x25 boundary? Check the `put_pixel` function for safety."
-- "Find any potential buffer overflows or input validation issues in the `scanf` calls within `add_object()` and `modify_object()`."
-- "How would the program handle 101 shapes? Does it fail gracefully or crash? Suggest a fix."
-
-### 🎨 5. Visualization & User Experience
-- "Describe how to create a simple GUI wrapper for this C back-end using a library like SDL2 or SFML."
-- "Generate a Mermaid flowchart that represents the state transition when an object is 'Modified' in the editor."
-- "Write a Python script that can read the `test_output.txt` and generate a PNG image representation of the ASCII canvas."
-
-### 📖 6. Documentation & Learning
-- "Write a detailed Docstring/Doxygen comment for each function in `main.c` explaining parameters and return values."
-- "If I were a student learning computer graphics, what are the three most important concepts I should take away from this specific implementation?"
+Visualisation:
+- Make a flowchart for the rendering loop (render_all) that shows how the switch-case handles different ShapeTypes.
+- Can you write a small script to take the test_output.txt and turn it into a black and white image so I can see the shapes better?
+- Explain how we could use a library like ncurses to make the menu looks more professional instead of just printing text in a loop.
