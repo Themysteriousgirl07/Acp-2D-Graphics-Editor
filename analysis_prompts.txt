@@ -1,7 +1,5 @@
 Project Analysis and Debugging Notes
 
-Use these questions and prompts to double-check the logic of the code, especially for the graphics algorithms and the structural design of the canvas.
-
 General Logic and Flow:
 - Explain how the 2D character array works as a canvas. Is it efficient to clear and redraw everything every time a shape is added, or is there a better way to do it for a terminal app?
 - Give me a step-by-step trace of what happens when the user picks option 1 to add a circle. Start from main() and go through draw_circle and put_pixel.
