@@ -1,0 +1,34 @@
+# AI Analysis & Visualization Prompts for 2D Graphics Editor
+
+Use these prompts with an AI assistant to deep-dive into the code, suggest improvements, or visualize the logic.
+
+---
+
+### 🔍 1. Code Logic & Architecture
+- "Explain the overall architecture of this C program. How does the canvas state management work between the `Shape` struct and the `canvas` array?"
+- "Trace the execution flow of the `main()` function. How is the menu-driven loop handled and what happens when an object is added vs rendered?"
+- "Analyze the memory management in this program. Since it uses fixed-size arrays (`MAX_SHAPES`), what are the pros/cons compared to dynamic allocation with `malloc`?"
+
+### 📐 2. Algorithm Deep Dives
+- "Explain Bresenham's Line Algorithm as implemented in `draw_line()`. How does the error variable (`err`) determine when to move along the Y-axis?"
+- "How does the Midpoint Circle Algorithm in `draw_circle()` ensure the circle is symmetrical? Explain the 8-way symmetry logic used in `put_pixel()` calls."
+- "Visualise the 'Midpoint Circle' logic: If I call `draw_circle(40, 12, 5)`, which exact coordinates on the 80x25 grid will be marked with '*'?"
+
+### 🛠️ 3. Feature Expansion & Refactoring
+- "Suggest a way to implement a 'Flood Fill' algorithm to color inside the shapes. What data structure would be most efficient for this?"
+- "How would you refactor the `Shape` struct to support modern C features or to make it easier to add new shapes like Ellipses or Polygons?"
+- "Show me how to modify the `display_canvas()` function to support ANSI color codes, so different shapes appear in different colors in the terminal."
+
+### 🐞 4. Debugging & Edge Cases
+- "What happens if a user inputs coordinates that fall outside the 80x25 boundary? Check the `put_pixel` function for safety."
+- "Find any potential buffer overflows or input validation issues in the `scanf` calls within `add_object()` and `modify_object()`."
+- "How would the program handle 101 shapes? Does it fail gracefully or crash? Suggest a fix."
+
+### 🎨 5. Visualization & User Experience
+- "Describe how to create a simple GUI wrapper for this C back-end using a library like SDL2 or SFML."
+- "Generate a Mermaid flowchart that represents the state transition when an object is 'Modified' in the editor."
+- "Write a Python script that can read the `test_output.txt` and generate a PNG image representation of the ASCII canvas."
+
+### 📖 6. Documentation & Learning
+- "Write a detailed Docstring/Doxygen comment for each function in `main.c` explaining parameters and return values."
+- "If I were a student learning computer graphics, what are the three most important concepts I should take away from this specific implementation?"
